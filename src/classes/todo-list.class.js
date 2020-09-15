@@ -23,11 +23,11 @@ export class TodoList {
     marcarCompletadoTodo(id){
 
         
-       for(const todo of this.todos){
-        if(todo.id == id) {
-
-         todo.marcarCompletadoTodo = !todo.marcarCompletadoTodo;
-         this.guardarLocalStorage()
+        for(const todo of this.todos){
+            if(todo.id == id) {
+                
+                todo.completado = !todo.completado;
+                this.guardarLocalStorage()
          break
         }
 

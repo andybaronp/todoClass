@@ -5,6 +5,8 @@ import {todoList} from '../index'
 const divTodoList = document.querySelector('.todo-list')
 const txtInput =document.querySelector('.new-todo');
 const btnBorraTodo = document.querySelector('.clear-completed')
+const ulFiltro = document.querySelector('.filters')
+const aFiltros = document.querySelectorAll('.filtro')
 
 
 
@@ -71,18 +73,60 @@ divTodoList.addEventListener('click', (e)=> {
 
 btnBorraTodo.addEventListener('click', e => {
 
+    // todoList.guardarLocalStorage()
     todoList.eliminarCompletados()
-
-
+    
+    
     for(let i = divTodoList.children.length-1; i >= 0; i--){
-
+        
         const elemento = divTodoList.children[i]
-
-       if (elemento.classList.contains('completed')){
-        divTodoList.removeChild(elemento)
+        
+        if (elemento.classList.contains('completed')){
+            divTodoList.removeChild(elemento)
        } 
 
     }
 
 
+})
+
+ulFiltro.addEventListener('click', e => {
+
+
+const filtros = e.target.text; 
+if(!filtros){return;}
+console.log(aFiltros);
+aFiltros.forEach( elem => elem.classList.remove('selected') );
+event.target.classList.add('selected');
+
+for(const elemento of divTodoList.children){
+    elemento.classList.remove('hidden');
+
+    const completado = elemento.classList.contains('completed');
+
+
+switch (filtros) {
+    case 'Pendientes':
+        if(completado){
+            elemento.classList.add('hidden')
+        }
+        
+        break;
+
+        case 'Completados':
+            if(!completado){
+                elemento.classList.add('hidden')
+            }
+            
+            break;
+
+}
+
+
+
+
+
+
+
+}
 })
